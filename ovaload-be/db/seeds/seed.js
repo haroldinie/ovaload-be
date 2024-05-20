@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
-const database = require("../connection")
-const User = require("../../models/user`")
+const connectDB = require("../connection")
+const User = require("../../models/user")
 const users = require("../data/test-data/users")
 
-database()
+connectDB()
 
 const seedDatabase = async () => {
     try {

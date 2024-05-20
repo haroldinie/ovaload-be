@@ -1,12 +1,5 @@
 const mongoose = require("mongoose")
 
-const userSchema = new mongoose.Schema({
-    name: String,
-    username: String,
-    password: String,
-    exercises: [exerciseSchema]
-})
-
 const exerciseSchema = new mongoose.Schema({
     exerciseName: String,
     exerciseStats: [{
@@ -31,6 +24,14 @@ const exerciseSchema = new mongoose.Schema({
 
     }]
 })
+
+const userSchema = new mongoose.Schema({
+    name: String,
+    username: String,
+    password: String,
+    exercises: [exerciseSchema]
+})
+
 
 
 /*
