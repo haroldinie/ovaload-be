@@ -1,22 +1,22 @@
-const mongoose = require("mongoose")
-const connectDB = require("../connection")
-const User = require("../../models/user")
-const users = require("../data/test-data/users")
-
-connectDB()
+const mongoose = require("mongoose");
+const connectDB = require("../connection");
+const User = require("../../models/user");
+const users = require("../data/test-data/users");
 
 const seedDatabase = async () => {
-    try {
-      // Clear existing data
-      await User.deleteMany({});
-      // Insert new data
-      await User.insertMany(users);
-      console.log('Database seeded successfully');
-    } catch (error) {
-      console.error('Error seeding database:', error);
-    } finally {
-      mongoose.connection.close();
-    }
-  };
+  try {
+    await connectDB();
+    // Clear existing data
+    await User.deleteMany({});
+    // Insert new data
+    await User.insertMany(users);
+    console.log("Database seeded successfully");
+  } catch (error) {
+    console.error("Error seeding database:", error);
+  } finally {
+    console.log("Database connection closed");
+    mongoose.connection.close();
+  }
+};
 
-  seedDatabase()
+seedDatabase();

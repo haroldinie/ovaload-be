@@ -9,8 +9,6 @@ dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 const mongoString = process.env.DATABASE_URL;
 
-console.log(mongoString);
-
 const connectDB = async () => {
   try {
     await mongoose.connect(mongoString, {
