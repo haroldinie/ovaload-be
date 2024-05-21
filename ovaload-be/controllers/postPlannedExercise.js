@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const { getExercises } = require("./getExercises");
 
 async function fetchExercises(username) {
   if (!username) {
@@ -85,7 +84,6 @@ exports.postPlannedExercise = async (req, res) => {
       };
     });
 
-    console.log(plannedExercises);
     // Save the new planned exercises to the user's document
     user.plannedExercise = user.plannedExercise.concat(plannedExercises);
     await user.save();

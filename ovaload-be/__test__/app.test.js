@@ -87,7 +87,7 @@ describe("/api/:user/exercises/:date", () => {
   });
 });
 
-describe.only("/api/:user/plannedExercises", () => {
+describe("/api/:user/plannedExercises", () => {
   test("POST 201: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
     const workoutArr = [
       { exerciseName: "Bench Press" , createdFor: "2024-05-22"},
@@ -100,7 +100,7 @@ describe.only("/api/:user/plannedExercises", () => {
       .then(({ body }) => {
         const { plannedExercises } = body;
         plannedExercises.forEach((exercise) => {
-          console.log(exercise)
+        expect(exercise.createdFor).toBe('2024-05-22T00:00:00.000Z')
         });
       });
   });
