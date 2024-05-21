@@ -53,7 +53,7 @@ describe("/api/:user/exercises/:exercise", () => {
       { weightKg: 85, sets: 3, reps: 8 },
     ];
     return request(app)
-      .get("/api/jimratty/exercises/664c7b06567913213424f5c6")
+      .get("/api/jimratty/exercises/bench-press")
       .expect(200)
       .then((response) => {
         console.log("response --->", response);
