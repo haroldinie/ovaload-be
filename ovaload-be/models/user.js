@@ -33,7 +33,6 @@ const userSchema = new mongoose.Schema({
 })
 
 
-
 /*
 exercises = [ { squats, [{kg, sets, reps, date}, {kg, sets, reps, date}] , }  , {pull ups ... }]
 */

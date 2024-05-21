@@ -13,6 +13,18 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
+describe("/api/:user/exercises", () => {
+  test("GET 200: Returns all exercises for given user.", () => {
+    return request(app)
+      .get("/api/jimratty/exercises")
+      .expect(200)
+      .then((response) => {
+        // const { exercises } = response;
+       console.log("hello from test");
+      });
+  });
+});
+
 describe("404 Invalid Endpoint", () => {
   test("GET ALL 404: Endpoint not found", () => {
     return request(app)
