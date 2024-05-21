@@ -46,6 +46,23 @@ describe("/api/:user/exercises", () => {
   });
 });
 
+describe("/api/:user/exercises/:exercise", () => {
+  test("GET 200: Returns exercise for given exercise id", () => {
+    const output = [
+      { weightKg: 80, sets: 3, reps: 10 },
+      { weightKg: 85, sets: 3, reps: 8 },
+    ];
+    return request(app)
+      .get("/api/jimratty/exercises/664c7b06567913213424f5c6")
+      .expect(200)
+      .then((response) => {
+        console.log("response --->", response);
+        expect(exerciseName).toBe("Bench Press");
+        expect(exerciseStats).toEqual(output);
+      });
+  });
+});
+
 describe("404 Invalid Endpoint", () => {
   test("GET ALL 404: Endpoint not found", () => {
     return request(app)
