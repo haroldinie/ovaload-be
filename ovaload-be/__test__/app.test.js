@@ -5,6 +5,10 @@ const connectDB = require("../db/connection");
 const mongoose = require("mongoose");
 const app = require("../app");
 
+beforeAll(async () => {
+  await connectDB();
+});
+
 beforeEach(async () => {
   await seed();
 });
