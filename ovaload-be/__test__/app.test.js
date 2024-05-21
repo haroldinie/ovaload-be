@@ -30,17 +30,35 @@ describe("404 Invalid Endpoint", () => {
 
 describe("/api/:user/exercises", () => {
   test("GET 200: Returns all exercises for given user.", () => {
+    const example = {
+      exerciseName: expect.any(String),
+      exerciseStats: expect.any(Array),
+      _id: expect.any(String),
+    };
     return request(app)
       .get("/api/jimratty/exercises")
       .expect(200)
       .then((response) => {
-        // const { exercises } = response;
-        console.log("hello from test");
+
+        const { exercises } = response.body;
+        expect(exercises.length).toBe(2);
+        exercises.map((exercise) => {
+          expect(exercise).toMatchObject(example);
+        });
+      });
+  });
+
+  test("GET 404: Returns error if no exercises found.", () => {
+    return request(app)
+      .get("/api/emilynorth/exercises")
+      .expect(404)
+      .then((response) => {
+        expect(response.body.message).toBe("No exercises found");
       });
   });
 });
 
-describe.only("/api/:user/:date/exercises", () => {
+describe("/api/:user/:date/exercises", () => {
   test("GET 200: Returns all exercises for user by selected date.", () => {
     return request(app)
       .get("/api/jimratty/2024-05-21/exercises")
