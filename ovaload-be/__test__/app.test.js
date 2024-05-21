@@ -46,6 +46,78 @@ describe("/api/:user/exercises", () => {
   });
 });
 
+
+describe("404 Invalid Endpoint", () => {
+  test("GET ALL 404: Endpoint not found", () => {
+    return request(app)
+    .get("/api/abc")
+    .expect(404)
+    .then((response) => {
+      expect(response.status).toBe(404);
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 describe("/api/:user/exercises/:exercise", () => {
   test("GET 200: Returns exercise for given exercise id", () => {
     const output = [
@@ -59,17 +131,6 @@ describe("/api/:user/exercises/:exercise", () => {
         console.log("response --->", response);
         expect(exerciseName).toBe("Bench Press");
         expect(exerciseStats).toEqual(output);
-      });
-  });
-});
-
-describe("404 Invalid Endpoint", () => {
-  test("GET ALL 404: Endpoint not found", () => {
-    return request(app)
-      .get("/api/abc")
-      .expect(404)
-      .then((response) => {
-        expect(response.status).toBe(404);
       });
   });
 });
