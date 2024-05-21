@@ -125,6 +125,12 @@ const users = [
       },
     ],
   },
+  {
+    name: "Emily North",
+    username: "emilynorth",
+    password: "northcoders",
+    exercises: [],
+  },
 ];
 
 module.exports = users;
