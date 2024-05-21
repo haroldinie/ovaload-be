@@ -56,4 +56,13 @@ describe.only("/api/:user/:date/exercises", () => {
         });
       });
   });
+
+  test("GET 400: Returns error if no exercises found.", () => {
+    return request(app)
+      .get("/api/jimratty/2024-05-20/exercises")
+      .expect(400)
+      .then((response) => {
+        expect(response.body.message).toBe("No exercises found for the given date.");
+      });
+  });
 });
