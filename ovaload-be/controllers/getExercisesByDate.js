@@ -20,7 +20,6 @@ exports.getExercisesByDate = async (req, res) => {
       return res.status(400).json({ message: "No exercises found for the given date." });
     }
 
-    console.log( {exercisesByDate})
     res.status(200).json({ exercisesByDate });
   } catch (error) {
     console.error(error);

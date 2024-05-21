@@ -8,7 +8,7 @@ const users = [
         exerciseName: "bench-press",
         exerciseStats: [
           { weightKg: 80, sets: 3, reps: 10 },
-          { weightKg: 85, sets: 3, reps: 8 },
+          { weightKg: 85, sets: 3, reps: 14 },
         ],
       },
       {
@@ -19,6 +19,12 @@ const users = [
         ],
       },
     ],
+  },
+  {
+    name: "Emily North",
+    username: "emilynorth",
+    password: "password456",
+    exercises: [],
   },
   {
     name: "Jane Smith",
@@ -126,3 +132,5 @@ const users = [
     ],
   },
 ];
+
+module.exports = users;
