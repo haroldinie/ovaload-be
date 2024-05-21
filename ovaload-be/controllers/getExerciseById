@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 exports.getExerciseById = async (req, res) => {
   const username = req.params.user;
-  const exercise = req.params.exercise;
+  const exerciseName = req.params.exercise;
 
   if (!username) {
     return res.status(404).json({ message: "User not found" });
@@ -11,15 +11,14 @@ exports.getExerciseById = async (req, res) => {
 
   try {
     const data = await User.findOne({
-      username: username
+      username: username,
     });
 
     const exercise = data.exercises.filter((exercise) => {
-      return (exercise._id === exerciseId);
+      return exercise.exerciseName === exerciseName;
     });
 
-      console.log(data, exerciseId, exercise);
-      
+    console.log(data, exerciseName, exercise);
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: "No exercises found" });
