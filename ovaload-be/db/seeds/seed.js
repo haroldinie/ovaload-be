@@ -14,9 +14,9 @@ const seedDatabase = async () => {
   } catch (error) {
     console.error("Error seeding database:", error);
   } finally {
-    console.log("Database connection closed");
+    console.log("Closing database connection");
     mongoose.connection.close();
   }
 };
 
-seedDatabase();
+module.exports = seedDatabase;
