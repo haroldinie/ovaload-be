@@ -34,10 +34,7 @@ const users = [
       {
         exerciseName: "deadlift",
         exerciseStats: [
-          { weightKg: 120, sets: 3, reps: 14 },
-          { weightKg: 120, sets: 3, reps: 12 },
-          { weightKg: 120, sets: 3, reps: 10 },
-          { weightKg: 120, sets: 3, reps: 8 }
+          { weightKg: 120, sets: 3, reps: 14 }
         ],
       },
       {
