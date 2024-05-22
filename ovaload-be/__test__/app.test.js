@@ -172,16 +172,16 @@ describe("GET /api/:user/plannedExercises/:date", () => {
       });
   });
 
-  // test("GET 400: Returns error if no exercises found.", () => {
-  //   return request(app)
-  //     .get("/api/jimratty/exercises/2024-05-20")
-  //     .expect(400)
-  //     .then((response) => {
-  //       expect(response.body.message).toBe(
-  //         "No exercises found for the given date."
-  //       );
-  //     });
-  // });
+  test("GET 400: Returns error if no exercises found.", () => {
+    return request(app)
+      .get("/api/janesmith/plannedExercises/2024-06-20")
+      .expect(400)
+      .then((response) => {
+        expect(response.body.message).toBe(
+          "No exercises found for the given date."
+        );
+      });
+  });
 });
 
 describe("/api/:user/exercises", () => {
