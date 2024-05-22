@@ -36,17 +36,18 @@ const plannedExerciseSchema = new mongoose.Schema({
       },
       sets: {
         type: Number,
-        min: 1,
+        min: 3,
         max: 5,
       },
       reps: {
         type: Number,
-        min: 1,
-        max: 15,
+        min: 6,
+        max: 14,
       },
     },
   ],
-  createdFor: { type: Date }
+  createdFor: { type: Date },
+  completed: { type: Boolean }
 });
 
 const userSchema = new mongoose.Schema({
@@ -54,7 +55,7 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   exercises: [exerciseSchema],
-  plannedExercise: [plannedExerciseSchema],
+  plannedExercise: [plannedExerciseSchema]
 });
 
 /*
