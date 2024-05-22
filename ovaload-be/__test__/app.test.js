@@ -90,18 +90,21 @@ describe("GET /api/:user/exercises/:date", () => {
 describe("POST /api/:user/plannedExercises", () => {
   test("POST 201: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
     const workoutArr = [
-      { exerciseName: "Bench Press", createdFor: "2024-06-22" },
-      { exerciseName: "squat", createdFor: "2024-06-22" },
+      { exerciseName: "Deadlift", createdFor: "2024-06-22" },
     ];
     return request(app)
-      .post("/api/jimratty/plannedExercises")
+      .post("/api/janesmith/plannedExercises")
       .send(workoutArr)
       .expect(201)
       .then(({ body }) => {
         const { plannedExercises } = body;
         plannedExercises.forEach((exercise) => {
-          expect(exercise.createdFor).toBe("2024-06-22T00:00:00.000Z");
-          expect(exercise.completed).toBe(false);
+          expect(exercise).toMatchObject({
+            exerciseName: 'deadlift',
+            nextChallenge: [ { weightKg: 120, sets: 4, reps: 6 } ],
+            createdFor: "2024-06-22T00:00:00.000Z",
+            completed: false
+          });
         });
       });
   });
@@ -125,30 +128,26 @@ describe("PATCH /api/:user/plannedExercises/:date/:exerciseName", () => {
   test("PATCH 200: Patch an planned exercise to update complete status from false to true when user completed challenge", () => {
     const completedChallenge = { completed: true };
     return request(app)
-      .patch("/api/jimratty/plannedExercises/2024-06-22/bench-press")
+      .patch("/api/janesmith/plannedExercises/2024-06-22/deadlift")
       .send(completedChallenge)
       .expect(200)
       .then(({ body }) => {
-        console.log(body)
         expect(body).toMatchObject({
-          exerciseName: 'bench-press',
-          nextChallenge: [ { weightKg: 87, sets: 3, reps: 6 } ],
+          exerciseName: 'deadlift',
+          nextChallenge: [ { weightKg: 120, sets: 4, reps: 6 } ],
           completed: true
         });
       });
   });
 
-  test("POST 404: Returns error if no exercises history found.", () => {
-    const workoutArr = [
-      { exerciseName: "Bench Press", createdFor: "2024-06-22" },
-      { exerciseName: "squat", createdFor: "2024-06-22" },
-    ];
+  test("PATCH 404: Respond with an error when invalid body", () => {
+    const completedChallenge = { completed: true };
     return request(app)
-      .post("/api/emilynorth/plannedExercises")
-      .send(workoutArr)
+    .patch("/api/jimratty/plannedExercises/2024-06-21/bench-press")
+      .send(completedChallenge)
       .expect(404)
       .then((response) => {
-        expect(response.body.message).toBe("No exercise history found.");
+        expect(response.body.message).toBe("Planned exercise not found");
       });
   });
 });

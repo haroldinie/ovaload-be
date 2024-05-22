@@ -27,7 +27,7 @@ exports.patchPlannedExercise = async (req, res) => {
     }
 
     // Update the completion status
-    plannedExercise.completed = true;
+    plannedExercise.completed = completed;
 
     // Save the updated user document
     await user.save();
