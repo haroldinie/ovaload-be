@@ -8,7 +8,7 @@ const users = [
         exerciseName: "bench-press",
         exerciseStats: [
           { weightKg: 80, sets: 3, reps: 10 },
-          { weightKg: 85, sets: 3, reps: 14 },
+          { weightKg: 85, sets: 5, reps: 14 },
         ],
       },
       {

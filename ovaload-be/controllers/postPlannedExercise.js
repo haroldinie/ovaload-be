@@ -66,21 +66,29 @@ exports.postPlannedExercise = async (req, res) => {
       //progress overload logic
       let nextWeightKg = latestStats.weightKg || 0;
       let nextReps = (latestStats.reps || 0) + 2;
-      let nextSets = latestStats.sets || 0;
+      let nextSets = latestStats.sets || 3;
 
       if (nextReps > 14) {
         nextReps = 6;
+        nextSets += 1;
+      }
+
+      if (nextSets > 5) {
+        nextSets = 3;
         nextWeightKg += 2;
       }
 
       return {
         exerciseName: exercise.exerciseName,
-        nextChallenge: [{
+        nextChallenge: [
+          {
             weightKg: nextWeightKg,
             sets: nextSets,
             reps: nextReps,
-          }],
+          },
+        ],
         createdFor: new Date(exercise.createdFor),
+        completed: false,
       };
     });
 
