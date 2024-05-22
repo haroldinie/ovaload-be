@@ -10,10 +10,6 @@ beforeAll(async () => {
   await seed();
 });
 
-// beforeEach(async () => {
-//   await seed();
-// });
-
 afterAll(async () => {
   await mongoose.connection.close();
 });
