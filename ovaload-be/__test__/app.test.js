@@ -29,7 +29,7 @@ describe("404 Invalid Endpoint", () => {
   });
 });
 
-describe("/api/:user/exercises", () => {
+describe("GET /api/:user/exercises", () => {
   test("GET 200: Returns all exercises for given user.", () => {
     const example = {
       exerciseName: expect.any(String),
@@ -58,14 +58,13 @@ describe("/api/:user/exercises", () => {
   });
 });
 
-describe("/api/:user/exercises/:date", () => {
+describe("GET /api/:user/exercises/:date", () => {
   test("GET 200: Returns all exercises for user by selected date.", () => {
     return request(app)
       .get("/api/jimratty/exercises/2024-05-22")
       .expect(200)
       .then(({ body }) => {
         const { exercisesByDate } = body;
-        console.log(exercisesByDate[0].exerciseStats)
         exercisesByDate.forEach((exercise) => {
           exercise.exerciseStats.forEach((stat) => {
             const regex = /^(\d\d\d\d-\d\d-\d\d)/g;
@@ -88,11 +87,11 @@ describe("/api/:user/exercises/:date", () => {
   });
 });
 
-describe("/api/:user/plannedExercises", () => {
+describe("POST /api/:user/plannedExercises", () => {
   test("POST 201: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
     const workoutArr = [
-      { exerciseName: "Bench Press" , createdFor: "2024-06-22"},
-      { exerciseName: "squat" , createdFor: "2024-06-22"},
+      { exerciseName: "Bench Press", createdFor: "2024-06-22" },
+      { exerciseName: "squat", createdFor: "2024-06-22" },
     ];
     return request(app)
       .post("/api/jimratty/plannedExercises")
@@ -101,9 +100,55 @@ describe("/api/:user/plannedExercises", () => {
       .then(({ body }) => {
         const { plannedExercises } = body;
         plannedExercises.forEach((exercise) => {
-        expect(exercise.createdFor).toBe('2024-06-22T00:00:00.000Z')
-        expect(exercise.completed).toBe(false)
+          expect(exercise.createdFor).toBe("2024-06-22T00:00:00.000Z");
+          expect(exercise.completed).toBe(false);
         });
+      });
+  });
+
+  test("POST 404: Returns error if no exercises history found.", () => {
+    const workoutArr = [
+      { exerciseName: "Bench Press", createdFor: "2024-06-22" },
+      { exerciseName: "squat", createdFor: "2024-06-22" },
+    ];
+    return request(app)
+      .post("/api/emilynorth/plannedExercises")
+      .send(workoutArr)
+      .expect(404)
+      .then((response) => {
+        expect(response.body.message).toBe("No exercise history found.");
+      });
+  });
+});
+
+describe("PATCH /api/:user/plannedExercises/:date/:exerciseName", () => {
+  test("PATCH 200: Patch an planned exercise to update complete status from false to true when user completed challenge", () => {
+    const completedChallenge = { completed: true };
+    return request(app)
+      .patch("/api/jimratty/plannedExercises/2024-06-22/bench-press")
+      .send(completedChallenge)
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body)
+        expect(body).toMatchObject({
+          exerciseName: 'bench-press',
+          nextChallenge: [ { weightKg: 87, sets: 3, reps: 6 } ],
+          completed: true
+        });
+      });
+  });
+
+  test("POST 404: Returns error if no exercises history found.", () => {
+    const workoutArr = [
+      { exerciseName: "Bench Press", createdFor: "2024-06-22" },
+      { exerciseName: "squat", createdFor: "2024-06-22" },
+    ];
+    return request(app)
+      .post("/api/emilynorth/plannedExercises")
+      .send(workoutArr)
+      .expect(404)
+      .then((response) => {
+        expect(response.body.message).toBe("No exercise history found.");
       });
   });
 });

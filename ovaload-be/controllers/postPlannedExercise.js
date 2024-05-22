@@ -13,12 +13,11 @@ async function fetchExercises(username) {
     const data = await User.findOne({ username: username }, "exercises");
     const exercises = data.exercises;
     if (exercises.length === 0) {
-      throw new Error("No exercises found");
+      throw new Error("No exercise history found.");
     }
 
     return exercises;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 }
@@ -98,6 +97,9 @@ exports.postPlannedExercise = async (req, res) => {
 
     res.status(201).json({ plannedExercises });
   } catch (error) {
+    if (error.message === "User not found" || error.message === "No exercise history found.") {
+      return res.status(404).json({ message: error.message });
+    }
     console.error(error);
     res.status(500).json({ message: "Internal server error." });
   }
