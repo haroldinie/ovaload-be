@@ -4,15 +4,19 @@ const request = require("supertest");
 const connectDB = require("../db/connection");
 const mongoose = require("mongoose");
 const app = require("../app");
+const { describe } = require("node:test");
 
 beforeAll(async () => {
   await connectDB();
-  await seed(data);
+
+  await seed(data)
 });
+
 
 // beforeEach(async () => {
 //   await seed(data);
 // });
+
 
 afterAll(async () => {
   await mongoose.connection.close();
@@ -40,6 +44,8 @@ describe("/api/:user/exercises", () => {
       .get("/api/jimratty/exercises")
       .expect(200)
       .then((response) => {
+
+
         const { exercises } = response.body;
         expect(exercises.length).toBe(2);
         exercises.map((exercise) => {
@@ -107,3 +113,69 @@ describe("/api/:user/plannedExercises", () => {
       });
   });
 });
+
+describe("/api/:user/exercises", () => {
+  test("POST 201: Posts a new exercise for given user", () => {
+    const newExercise = {
+      exerciseName: "hamstring",
+      exerciseStats: [{
+        weightKg: 5,
+        sets: 3,
+        reps: 8
+      }]
+    }
+    return request(app)
+    .post("/api/jimratty/exercises")
+    .send(newExercise)
+    .expect(201)
+    .then(({body}) => {
+      const {exercise} = body
+      expect(exercise).toMatchObject({
+        exerciseName: "hamstring",
+        exerciseStats: [{
+        weightKg: 5,
+        sets: 3,
+        reps: 8,
+        createdAt: expect.any(String)
+      }]
+      })
+    })
+  })
+  test("Throws post 400 when exercise already exists", () => {
+    const newExercise = {
+      exerciseName: "Squat",
+      exerciseStats: [{
+        weightKg: 5,
+        sets: 3,
+        reps: 10
+      }]
+    }
+    return request(app)
+    .post("/api/jimratty/exercises")
+    .send(newExercise)
+    .expect(400)
+  })
+})
+
+describe("/api/:user/exercises/:exerciseName", () => {
+  test("POST 201: Posts new exercise stats", () => {
+    const newExerciseStats = {
+      weightKg: 50,
+      reps: 10,
+      sets: 3
+    }
+    return request(app)
+    .post("/api/jimratty/exercises/Squat")
+    .send(newExerciseStats)
+    .expect(201)
+    .then(({body}) => {
+      const exerciseStats = body
+      expect(exerciseStats).toMatchObject({
+        weightKg: 50,
+        reps: 10,
+        sets: 3,
+        createdAt: expect.any(String)
+      })
+    })
+  })
+})
