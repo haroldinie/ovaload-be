@@ -4,7 +4,7 @@ exports.postExerciseStats = async (req, res) => {
   const username = req.params.user;
   const exerciseName = req.params.exerciseName;
   const newExerciseStats = req.body;
-
+  
   try {
     const user = await User.findOne({ username: username });
     if (!user) {
@@ -13,14 +13,16 @@ exports.postExerciseStats = async (req, res) => {
 
     let addedExerciseStats;
 
-    user.exercises.map((exercise) => {
-      if (exercise.exerciseName === exerciseName) {
-        exercise.exerciseStats.push(newExerciseStats);
-        addedExerciseStats =
-          exercise.exerciseStats[exercise.exerciseStats.length - 1];
-      }
-      return exercise;
-    });
+    const exercise = user.exercises.find(exercise => exercise.exerciseName === exerciseName);
+
+    if (!exercise) {
+      return res.status(404).json({ message: "Exercise not found" });
+    }
+
+    exercise.exerciseStats.push(newExerciseStats);
+    addedExerciseStats = exercise.exerciseStats[exercise.exerciseStats.length - 1];
+
+    
 
     await user.save();
 

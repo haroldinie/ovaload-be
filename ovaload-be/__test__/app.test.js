@@ -71,7 +71,6 @@ describe("/api/:user/exercises/:date", () => {
       .expect(200)
       .then(({ body }) => {
         const { exercisesByDate } = body;
-        console.log(exercisesByDate[0].exerciseStats)
         exercisesByDate.forEach((exercise) => {
           exercise.exerciseStats.forEach((stat) => {
             const regex = /^(\d\d\d\d-\d\d-\d\d)/g;
@@ -143,7 +142,7 @@ describe("/api/:user/exercises", () => {
   })
   test("Throws post 400 when exercise already exists", () => {
     const newExercise = {
-      exerciseName: "Squat",
+      exerciseName: "squat",
       exerciseStats: [{
         weightKg: 5,
         sets: 3,
@@ -165,7 +164,7 @@ describe("/api/:user/exercises/:exerciseName", () => {
       sets: 3
     }
     return request(app)
-    .post("/api/jimratty/exercises/Squat")
+    .post("/api/jimratty/exercises/squat")
     .send(newExerciseStats)
     .expect(201)
     .then(({body}) => {
