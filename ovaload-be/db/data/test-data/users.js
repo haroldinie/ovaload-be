@@ -120,7 +120,7 @@ const users = [
       {
         exerciseName: "leg-curl",
         exerciseStats: [
-          { weightKg: 40, sets: 3, reps: 12 },
+          { weightKg: 40, sets: 3, reps: 8 },
           { weightKg: 45, sets: 3, reps: 10 },
         ],
       },
@@ -130,6 +130,20 @@ const users = [
           { weightKg: 50, sets: 4, reps: 12 },
           { weightKg: 55, sets: 4, reps: 10 },
         ],
+      },
+    ],
+    plannedExercise: [
+      {
+        exerciseName: "leg-curl",
+        nextChallenge: [{ weightKg: 47, sets: 4, reps: 12 }],
+        createdFor: "2024-05-12T09:38:41.355Z",
+        completed: false,
+      },
+      {
+        exerciseName: "leg-extension",
+        nextChallenge: [{ weightKg: 57, sets: 5, reps: 12 }],
+        createdFor: "2024-05-13T09:38:41.355Z",
+        completed: false,
       },
     ],
   },
