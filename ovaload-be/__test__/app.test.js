@@ -8,7 +8,6 @@ const { describe } = require("node:test");
 
 beforeAll(async () => {
   await connectDB();
-
   await seed(data)
 });
 
@@ -158,6 +157,33 @@ describe("PATCH /api/:user/plannedExercises/:date/:exerciseName", () => {
   });
 });
 
+describe("GET /api/:user/plannedExercises/:date", () => {
+  test("GET 200: Returns all planned exercises for user by selected date.", () => {
+    return request(app)
+      .get("/api/janesmith/plannedExercises/2024-06-22")
+      .expect(200)
+      .then(({ body }) => {
+        const { plannedExercisesByDate } = body;
+        plannedExercisesByDate.forEach((exercise) => {
+          expect(exercise).toMatchObject({
+            createdFor: "2024-06-22T00:00:00.000Z"
+          });
+        });
+      });
+  });
+
+  // test("GET 400: Returns error if no exercises found.", () => {
+  //   return request(app)
+  //     .get("/api/jimratty/exercises/2024-05-20")
+  //     .expect(400)
+  //     .then((response) => {
+  //       expect(response.body.message).toBe(
+  //         "No exercises found for the given date."
+  //       );
+  //     });
+  // });
+});
+
 describe("/api/:user/exercises", () => {
   test("POST 201: Posts a new exercise for given user", () => {
     const newExercise = {
@@ -223,3 +249,25 @@ describe("/api/:user/exercises/:exerciseName", () => {
     })
   })
 })
+
+describe("/api/:user/:exercise", () => {
+  test("GET 200: Returns exercise for given exercise id", () => {
+    const output = {
+      reps: expect.any(Number),
+      sets: expect.any(Number),
+      weightKg: expect.any(Number),
+    };
+    return request(app)
+      .get("/api/jimratty/bench-press")
+      .expect(200)
+      .then((response) => {
+        const { exercise } = response.body;
+        expect(exercise.exerciseName).toBe("bench-press");
+        exercise.exerciseStats.map((obj) => {
+          expect(obj).toMatchObject(output);
+        });
+      });
+  });
+});
+
+
