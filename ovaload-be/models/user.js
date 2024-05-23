@@ -55,7 +55,8 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   exercises: [exerciseSchema],
-  plannedExercise: [plannedExerciseSchema]
+  plannedExercise: [plannedExerciseSchema],
+  score: {type: Number,  default: 0},
 });
 
 /*
