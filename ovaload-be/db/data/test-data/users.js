@@ -167,8 +167,7 @@ const users = [
         exerciseName: "spin-bike",
         exerciseType: "cardio",
         exerciseStats: [
-          { distanceKm: 20, timeMin: 40, reps: 12 },
-          { weightKg: 45, sets: 3, reps: 10 },
+          { distanceKm: 20, timeMin: 40}
         ],
       },
       {
