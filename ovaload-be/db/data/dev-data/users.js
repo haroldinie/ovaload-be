@@ -6,6 +6,7 @@ const users = [
     exercises: [
       {
         exerciseName: "bench-press",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 80, sets: 3, reps: 10 },
           { weightKg: 85, sets: 3, reps: 8 },
@@ -13,6 +14,7 @@ const users = [
       },
       {
         exerciseName: "squat",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 100, sets: 4, reps: 10 },
           { weightKg: 110, sets: 4, reps: 8 },
@@ -27,15 +29,17 @@ const users = [
     exercises: [
       {
         exerciseName: "deadlift",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 120, sets: 3, reps: 14 },
           { weightKg: 120, sets: 3, reps: 12 },
           { weightKg: 120, sets: 3, reps: 10 },
-          { weightKg: 120, sets: 3, reps: 8 }
+          { weightKg: 120, sets: 3, reps: 8 },
         ],
       },
       {
         exerciseName: "overhead-press",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 50, sets: 3, reps: 12 },
           { weightKg: 55, sets: 3, reps: 10 },
@@ -50,6 +54,7 @@ const users = [
     exercises: [
       {
         exerciseName: "pull-ups",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 0, sets: 3, reps: 15 },
           { weightKg: 0, sets: 4, reps: 12 },
@@ -57,6 +62,7 @@ const users = [
       },
       {
         exerciseName: "leg-press",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 200, sets: 4, reps: 10 },
           { weightKg: 220, sets: 4, reps: 8 },
@@ -71,6 +77,7 @@ const users = [
     exercises: [
       {
         exerciseName: "bicep-curls",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 15, sets: 3, reps: 12 },
           { weightKg: 20, sets: 3, reps: 10 },
@@ -78,6 +85,7 @@ const users = [
       },
       {
         exerciseName: "tricep-dips",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 0, sets: 3, reps: 15 },
           { weightKg: 0, sets: 3, reps: 12 },
@@ -92,6 +100,7 @@ const users = [
     exercises: [
       {
         exerciseName: "lat-pulldown",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 70, sets: 4, reps: 10 },
           { weightKg: 75, sets: 4, reps: 8 },
@@ -99,6 +108,7 @@ const users = [
       },
       {
         exerciseName: "shoulder-press",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 60, sets: 3, reps: 12 },
           { weightKg: 65, sets: 3, reps: 10 },
@@ -113,6 +123,7 @@ const users = [
     exercises: [
       {
         exerciseName: "leg-curl",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 40, sets: 3, reps: 12 },
           { weightKg: 45, sets: 3, reps: 10 },
@@ -120,6 +131,38 @@ const users = [
       },
       {
         exerciseName: "leg-extension",
+        exerciseType: "resistance",
+        exerciseStats: [
+          { weightKg: 50, sets: 4, reps: 12 },
+          { weightKg: 55, sets: 4, reps: 10 },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Maisy Jones",
+    username: "maizj",
+    password: "password55",
+    exercises: [
+      {
+        exerciseName: "spin-bike",
+        exerciseType: "cardio",
+        exerciseStats: [
+          { distanceKm: 20, timeMin: 40, reps: 12 },
+          { weightKg: 45, sets: 3, reps: 10 },
+        ],
+      },
+      {
+        exerciseName: "eliptical",
+        exerciseType: "cardio",
+        exerciseStats: [
+          { distanceKm: 3, timeMin: 30 },
+          { distanceKm: 3, timeMin: 28 },
+        ],
+      },
+      {
+        exerciseName: "military-press",
+        exerciseType: "resistance",
         exerciseStats: [
           { weightKg: 50, sets: 4, reps: 12 },
           { weightKg: 55, sets: 4, reps: 10 },
