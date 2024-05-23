@@ -27,6 +27,7 @@ describe("404 Invalid Endpoint", () => {
       .get("/api/abc")
       .expect(404)
       .then((response) => {
+        expect(response.text).toBe("Invalid Endpoint");
         expect(response.status).toBe(404);
       });
   });

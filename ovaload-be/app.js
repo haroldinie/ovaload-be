@@ -30,4 +30,8 @@ app.post("/api/:user/exercises", postExercise);
 
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);
 
+app.all("*", (req, res) => {
+  res.status(404).send("Invalid Endpoint");
+});
+
 module.exports = app;
