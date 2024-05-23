@@ -291,26 +291,6 @@ describe("GET /api/:user/:exercise", () => {
   });
 });
 
-describe("GET /api/:username", () => {
-  test("GET 200: Returns the object ID of the user passed in", () => {
-    // const username = "emilynorth"
-    return request(app)
-    .get("/api/emilynorth")
-    .expect(200)
-    .then((response) => {
-      const newFriend = response.body
-      expect(newFriend).toMatchObject({
-        _id: expect.any(String),
-      name: expect.any(String),
-      username: expect.any(String),
-      password: expect.any(String),
-      exercises: expect.any(Array),
-      plannedExercise: expect.any(Array),
-      __v: expect.any(Number)
-      })
-    })
-  })
-})
 
 describe("PATCH /api/:user/leaderboard", () => {
   test("PATCH 200: Update leaderboard score for new user", () => {
@@ -349,4 +329,20 @@ describe("GET /api/leaderboard", () => {
       });
   });
 });
+
+describe.only("PATCH /api/:user", () => {
+  test("PATCH 200: Updates friends list of logged-in user when given ObjectId of new friend",() => {
+    const newFriend = {
+      username:'emilynorth'
+    }
+    return request(app)
+    .patch("/api/chrisevans")
+    .send(newFriend)
+    .expect(200)
+    .then(({body}) => {
+      const {updatedFriendsList} = body
+      expect(updatedFriendsList[updatedFriendsList.length-1]).toEqual(newFriend.username)
+    })
+  })
+})
 

@@ -75,7 +75,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: String,
-  friends: [mongoose.SchemaTypes.ObjectId],
+  friends: [String],
   exercises: [exerciseSchema],
   plannedExercise: [plannedExerciseSchema],
   score: {type: Number,  default: 0},
