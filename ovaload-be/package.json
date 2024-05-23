@@ -30,5 +30,8 @@
     "setupFilesAfterEnv": [
       "jest-sorted"
     ]
-  }
+  },
+  "engines": {
+    "node": ">=NODE_JS_VERSION"
+}
 }
