@@ -19,6 +19,7 @@ const {
 } = require("./controllers/getLeaderboardScore");
 
 const Model = require("./models/user");
+const { getNewFriendId } = require("./controllers/getNewFriendId");
 
 const app = express();
 
@@ -39,11 +40,17 @@ app.patch(
 
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);
 
+
+app.get("/api/:username", getNewFriendId)
+
+app.post("api/:username")
+
 app.patch("/api/:user/leaderboard", patchLeaderboardScore);
 app.get("/api/leaderboard", getAllScores);
 
 app.all("*", (req, res) => {
   res.status(404).send("Invalid Endpoint");
 });
+
 
 module.exports = app;

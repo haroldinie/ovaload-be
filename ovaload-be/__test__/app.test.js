@@ -4,8 +4,8 @@ const request = require("supertest");
 const connectDB = require("../db/connection");
 const mongoose = require("mongoose");
 const app = require("../app");
-
 const { describe } = require("node:test");
+
 
 beforeAll(async () => {
   await connectDB();
@@ -199,7 +199,7 @@ describe("GET /api/:user/plannedExercises/:date", () => {
   });
 });
 
-describe("/api/:user/exercises", () => {
+describe("POST /api/:user/exercises", () => {
   test("POST 201: Posts a new exercise for given user", () => {
     const newExercise = {
       exerciseName: "hamstring",
@@ -248,7 +248,7 @@ describe("/api/:user/exercises", () => {
   });
 });
 
-describe("/api/:user/exercises/:exerciseName", () => {
+describe("POST /api/:user/exercises/:exerciseName", () => {
   test("POST 201: Posts new exercise stats", () => {
     const newExerciseStats = {
       weightKg: 50,
@@ -271,7 +271,7 @@ describe("/api/:user/exercises/:exerciseName", () => {
   });
 });
 
-describe("/api/:user/:exercise", () => {
+describe("GET /api/:user/:exercise", () => {
   test("GET 200: Returns exercise for given exercise id", () => {
     const output = {
       reps: expect.any(Number),
@@ -290,6 +290,27 @@ describe("/api/:user/:exercise", () => {
       });
   });
 });
+
+describe("GET /api/:username", () => {
+  test("GET 200: Returns the object ID of the user passed in", () => {
+    // const username = "emilynorth"
+    return request(app)
+    .get("/api/emilynorth")
+    .expect(200)
+    .then((response) => {
+      const newFriend = response.body
+      expect(newFriend).toMatchObject({
+        _id: expect.any(String),
+      name: expect.any(String),
+      username: expect.any(String),
+      password: expect.any(String),
+      exercises: expect.any(Array),
+      plannedExercise: expect.any(Array),
+      __v: expect.any(Number)
+      })
+    })
+  })
+})
 
 describe("PATCH /api/:user/leaderboard", () => {
   test("PATCH 200: Update leaderboard score for new user", () => {
@@ -328,3 +349,4 @@ describe("GET /api/leaderboard", () => {
       });
   });
 });
+
