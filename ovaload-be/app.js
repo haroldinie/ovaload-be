@@ -14,13 +14,11 @@ const {
   patchLeaderboardScore,
 } = require("./controllers/patchLeaderboardScore");
 const {
-  getAllScores,
-  getUserScore,
+  getAllScores
 } = require("./controllers/getLeaderboardScore");
-
-const Model = require("./models/user");
 const { patchNewFriendByUsername } = require("./controllers/patchNewFriendByUsername")
 
+require("dotenv").config();
 const app = express();
 
 app.use(express.json());
