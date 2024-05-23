@@ -19,7 +19,7 @@ const {
 } = require("./controllers/getLeaderboardScore");
 
 const Model = require("./models/user");
-const { getNewFriendId } = require("./controllers/getNewFriendId");
+const { patchNewFriendByUsername } = require("./controllers/patchNewFriendByUsername")
 
 const app = express();
 
@@ -40,10 +40,7 @@ app.patch(
 
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);
 
-
-app.get("/api/:username", getNewFriendId)
-
-app.post("api/:username")
+app.patch("/api/:user", patchNewFriendByUsername)
 
 app.patch("/api/:user/leaderboard", patchLeaderboardScore);
 app.get("/api/leaderboard", getAllScores);
