@@ -3,7 +3,12 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const env = process.env.NODE_ENV || "development";
-const envFile = env === "test" ? ".env.test" : ".env.development";
+const envFile =
+  env === "test"
+    ? ".env.test"
+    : env === "production"
+    ? ".env.production"
+    : ".env.development";
 
 dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
@@ -14,6 +19,7 @@ const connectDB = async () => {
     await mongoose.connect(mongoString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 60000,
     });
     console.log("Database connected");
   } catch (error) {

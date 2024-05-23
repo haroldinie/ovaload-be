@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const exerciseSchema = new mongoose.Schema({
   exerciseName: { type: String, lowercase: true },
+  exerciseType: { type: String, lowercase: true },
   exerciseStats: [
     {
       weightKg: {
@@ -17,6 +18,16 @@ const exerciseSchema = new mongoose.Schema({
         type: Number,
         min: 1,
         max: 15,
+      },
+      distanceKm: {
+        type: Number,
+        min: 1,
+        max: 100,
+      },
+      timeMin: {
+        type: Number,
+        min: 1,
+        max: 180,
       },
       createdAt: {
         type: Date,
@@ -44,6 +55,16 @@ const plannedExerciseSchema = new mongoose.Schema({
         min: 6,
         max: 14,
       },
+      distanceKm: {
+        type: Number,
+        min: 1,
+        max: 100,
+      },
+      timeMin: {
+        type: Number,
+        min: 1,
+        max: 180,
+      },
     },
   ],
   createdFor: { type: Date },
@@ -54,7 +75,8 @@ const userSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: String,
-  exercises: [exerciseSchema],
+  friends: [mongoose.SchemaTypes.ObjectId],
+  exercises: [exerciseSchema],  
   plannedExercise: [plannedExerciseSchema]
 });
 
