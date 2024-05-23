@@ -91,7 +91,7 @@ describe("GET /api/:user/exercises/:date", () => {
 });
 
 describe("POST /api/:user/plannedExercises", () => {
-  test("POST 201: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
+  test("POST 201: Resistance - Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
     const workoutArr = [{ exerciseName: "Deadlift", createdFor: "2024-06-22" }];
     return request(app)
       .post("/api/janesmith/plannedExercises")
@@ -103,6 +103,25 @@ describe("POST /api/:user/plannedExercises", () => {
           expect(exercise).toMatchObject({
             exerciseName: "deadlift",
             nextChallenge: [{ weightKg: 120, sets: 4, reps: 6 }],
+            createdFor: "2024-06-22T00:00:00.000Z",
+            completed: false,
+          });
+        });
+      });
+  });
+
+  test("POST 201: Cardio: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
+    const workoutArr = [{ exerciseName: "Spin Bike", createdFor: "2024-06-22", distanceKm: 20, timeMin: 27}];
+    return request(app)
+      .post("/api/maizj/plannedExercises")
+      .send(workoutArr)
+      .expect(201)
+      .then(({ body }) => {
+        const { plannedExercises } = body;
+        plannedExercises.forEach((exercise) => {
+          expect(exercise).toMatchObject({
+            exerciseName: "spin-bike",
+            nextChallenge: [{ distanceKm: 20, timeMin: 27}],
             createdFor: "2024-06-22T00:00:00.000Z",
             completed: false,
           });
