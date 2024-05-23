@@ -17,11 +17,9 @@ const mongoString = process.env.DATABASE_URL;
 const connectDB = async () => {
   try {
     await mongoose.connect(mongoString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 60000,
+      autoIndex: true
     });
-    console.log("Database connected");
+    console.log("Connected to Mongodb Atlas");
   } catch (error) {
     console.error("Error connecting to database:", error);
     process.exit(1); // Exit process with failure
