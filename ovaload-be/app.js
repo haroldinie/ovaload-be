@@ -10,6 +10,7 @@ const { postExerciseStats } = require("./controllers/postExerciseStats");
 const { getPlannedExercisesByDate } = require("./controllers/getPlannedExercisesByDate");
 
 const Model = require("./models/user");
+const { getNewFriendId } = require("./controllers/getNewFriendId");
 
 const app = express();
 
@@ -29,5 +30,9 @@ app.patch(
 app.post("/api/:user/exercises", postExercise);
 
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);
+
+app.get("/api/:username", getNewFriendId)
+
+app.post("api/:username")
 
 module.exports = app;
