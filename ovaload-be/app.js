@@ -7,7 +7,16 @@ const { patchPlannedExercise } = require("./controllers/patchPlannedExercise");
 
 const { postExercise } = require("./controllers/postExercise");
 const { postExerciseStats } = require("./controllers/postExerciseStats");
-const { getPlannedExercisesByDate } = require("./controllers/getPlannedExercisesByDate");
+const {
+  getPlannedExercisesByDate,
+} = require("./controllers/getPlannedExercisesByDate");
+const {
+  patchLeaderboardScore,
+} = require("./controllers/patchLeaderboardScore");
+const {
+  getAllScores,
+  getUserScore,
+} = require("./controllers/getLeaderboardScore");
 
 const Model = require("./models/user");
 
@@ -16,6 +25,8 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/:user/exercises", getExercises);
+app.post("/api/:user/exercises", postExercise);
+
 app.get("/api/:user/:exercise", getExerciseById);
 app.get("/api/:user/exercises/:date", getExercisesByDate);
 
@@ -26,8 +37,13 @@ app.patch(
   patchPlannedExercise
 );
 
-app.post("/api/:user/exercises", postExercise);
-
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);
+
+app.patch("/api/:user/leaderboard", patchLeaderboardScore);
+app.get("/api/leaderboard", getAllScores);
+
+app.all("*", (req, res) => {
+  res.status(404).send("Invalid Endpoint");
+});
 
 module.exports = app;

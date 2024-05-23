@@ -4,18 +4,17 @@ const request = require("supertest");
 const connectDB = require("../db/connection");
 const mongoose = require("mongoose");
 const app = require("../app");
+
 const { describe } = require("node:test");
 
 beforeAll(async () => {
   await connectDB();
-  await seed(data)
+  await seed(data);
 });
-
 
 // beforeEach(async () => {
 //   await seed(data);
 // });
-
 
 afterAll(async () => {
   await mongoose.connection.close();
@@ -27,6 +26,7 @@ describe("404 Invalid Endpoint", () => {
       .get("/api/abc")
       .expect(404)
       .then((response) => {
+        expect(response.text).toBe("Invalid Endpoint");
         expect(response.status).toBe(404);
       });
   });
@@ -43,8 +43,6 @@ describe("GET /api/:user/exercises", () => {
       .get("/api/jimratty/exercises")
       .expect(200)
       .then((response) => {
-
-
         const { exercises } = response.body;
         expect(exercises.length).toBe(2);
         exercises.map((exercise) => {
@@ -94,9 +92,7 @@ describe("GET /api/:user/exercises/:date", () => {
 
 describe("POST /api/:user/plannedExercises", () => {
   test("POST 201: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
-    const workoutArr = [
-      { exerciseName: "Deadlift", createdFor: "2024-06-22" },
-    ];
+    const workoutArr = [{ exerciseName: "Deadlift", createdFor: "2024-06-22" }];
     return request(app)
       .post("/api/janesmith/plannedExercises")
       .send(workoutArr)
@@ -105,10 +101,10 @@ describe("POST /api/:user/plannedExercises", () => {
         const { plannedExercises } = body;
         plannedExercises.forEach((exercise) => {
           expect(exercise).toMatchObject({
-            exerciseName: 'deadlift',
-            nextChallenge: [ { weightKg: 120, sets: 4, reps: 6 } ],
+            exerciseName: "deadlift",
+            nextChallenge: [{ weightKg: 120, sets: 4, reps: 6 }],
             createdFor: "2024-06-22T00:00:00.000Z",
-            completed: false
+            completed: false,
           });
         });
       });
@@ -138,9 +134,9 @@ describe("PATCH /api/:user/plannedExercises/:date/:exerciseName", () => {
       .expect(200)
       .then(({ body }) => {
         expect(body).toMatchObject({
-          exerciseName: 'deadlift',
-          nextChallenge: [ { weightKg: 120, sets: 4, reps: 6 } ],
-          completed: true
+          exerciseName: "deadlift",
+          nextChallenge: [{ weightKg: 120, sets: 4, reps: 6 }],
+          completed: true,
         });
       });
   });
@@ -148,7 +144,7 @@ describe("PATCH /api/:user/plannedExercises/:date/:exerciseName", () => {
   test("PATCH 404: Respond with an error when invalid body", () => {
     const completedChallenge = { completed: true };
     return request(app)
-    .patch("/api/jimratty/plannedExercises/2024-06-21/bench-press")
+      .patch("/api/jimratty/plannedExercises/2024-06-21/bench-press")
       .send(completedChallenge)
       .expect(404)
       .then((response) => {
@@ -166,7 +162,7 @@ describe("GET /api/:user/plannedExercises/:date", () => {
         const { plannedExercisesByDate } = body;
         plannedExercisesByDate.forEach((exercise) => {
           expect(exercise).toMatchObject({
-            createdFor: "2024-06-22T00:00:00.000Z"
+            createdFor: "2024-06-22T00:00:00.000Z",
           });
         });
       });
@@ -188,67 +184,73 @@ describe("/api/:user/exercises", () => {
   test("POST 201: Posts a new exercise for given user", () => {
     const newExercise = {
       exerciseName: "hamstring",
-      exerciseStats: [{
-        weightKg: 5,
-        sets: 3,
-        reps: 8
-      }]
-    }
+      exerciseStats: [
+        {
+          weightKg: 5,
+          sets: 3,
+          reps: 8,
+        },
+      ],
+    };
     return request(app)
-    .post("/api/jimratty/exercises")
-    .send(newExercise)
-    .expect(201)
-    .then(({body}) => {
-      const {exercise} = body
-      expect(exercise).toMatchObject({
-        exerciseName: "hamstring",
-        exerciseStats: [{
-        weightKg: 5,
-        sets: 3,
-        reps: 8,
-        createdAt: expect.any(String)
-      }]
-      })
-    })
-  })
+      .post("/api/jimratty/exercises")
+      .send(newExercise)
+      .expect(201)
+      .then(({ body }) => {
+        const { exercise } = body;
+        expect(exercise).toMatchObject({
+          exerciseName: "hamstring",
+          exerciseStats: [
+            {
+              weightKg: 5,
+              sets: 3,
+              reps: 8,
+              createdAt: expect.any(String),
+            },
+          ],
+        });
+      });
+  });
   test("Throws post 400 when exercise already exists", () => {
     const newExercise = {
       exerciseName: "squat",
-      exerciseStats: [{
-        weightKg: 5,
-        sets: 3,
-        reps: 10
-      }]
-    }
+      exerciseStats: [
+        {
+          weightKg: 5,
+          sets: 3,
+          reps: 10,
+        },
+      ],
+    };
     return request(app)
-    .post("/api/jimratty/exercises")
-    .send(newExercise)
-    .expect(400)
-  })
-})
+      .post("/api/jimratty/exercises")
+      .send(newExercise)
+      .expect(400);
+  });
+});
 
 describe("/api/:user/exercises/:exerciseName", () => {
   test("POST 201: Posts new exercise stats", () => {
     const newExerciseStats = {
       weightKg: 50,
       reps: 10,
-      sets: 3
-    }
+      sets: 3,
+    };
     return request(app)
-    .post("/api/jimratty/exercises/squat")
-    .send(newExerciseStats)
-    .expect(201)
-    .then(({body}) => {
-      const exerciseStats = body
-      expect(exerciseStats).toMatchObject({
-        weightKg: 50,
-        reps: 10,
-        sets: 3,
-        createdAt: expect.any(String)
-      })
-    })
-  })
-})
+      .post("/api/jimratty/exercises/squat")
+      .send(newExerciseStats)
+      .expect(201)
+      .then(({ body }) => {
+        const exerciseStats = body;
+        expect(exerciseStats).toMatchObject({
+          weightKg: 50,
+          reps: 10,
+          sets: 3,
+          createdAt: expect.any(String),
+        });
+      });
+  });
+});
 
 describe("/api/:user/:exercise", () => {
   test("GET 200: Returns exercise for given exercise id", () => {
@@ -270,4 +272,40 @@ describe("/api/:user/:exercise", () => {
   });
 });
 
+describe("PATCH /api/:user/leaderboard", () => {
+  test("PATCH 200: Update leaderboard score for new user", () => {
+    const score = { score: 2 };
+    return request(app)
+      .patch("/api/janesmith/leaderboard")
+      .send(score)
+      .expect(200)
+      .then(({ body }) => {
+        const { updatedScore } = body;
+        expect(updatedScore).toBe(2);
+      });
+  });
 
+  test("PATCH 200: Update leaderboard score when user have previous score ", () => {
+    const score = { score: 2 };
+    return request(app)
+      .patch("/api/janesmith/leaderboard")
+      .send(score)
+      .expect(200)
+      .then(({ body }) => {
+        const { updatedScore } = body;
+        expect(updatedScore).toBe(4);
+      });
+  });
+});
+
+describe("GET /api/leaderboard", () => {
+  test("GET 200: Get all users' scores sorted by score in descending order", () => {
+    return request(app)
+      .get("/api/leaderboard")
+      .expect(200)
+      .then(({body}) => {
+        const { users } = body
+        expect(users).toBeSortedBy("score",{ descending: true });
+      });
+  });
+});

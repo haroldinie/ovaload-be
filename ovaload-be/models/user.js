@@ -76,8 +76,9 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   friends: [mongoose.SchemaTypes.ObjectId],
-  exercises: [exerciseSchema],  
-  plannedExercise: [plannedExerciseSchema]
+  exercises: [exerciseSchema],
+  plannedExercise: [plannedExerciseSchema],
+  score: {type: Number,  default: 0},
 });
 
 /*
