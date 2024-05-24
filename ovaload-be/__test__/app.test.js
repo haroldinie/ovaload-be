@@ -64,7 +64,7 @@ describe("GET /api/:user/exercises", () => {
 describe("GET /api/:user/exercises/:date", () => {
   test("GET 200: Returns all exercises for user by selected date.", () => {
     return request(app)
-      .get("/api/jimratty/exercises/2024-05-23")
+      .get("/api/jimratty/exercises/2024-05-24")
       .expect(200)
       .then(({ body }) => {
         const { exercisesByDate } = body;

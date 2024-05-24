@@ -1,5 +1,5 @@
 const seedDatabase = require("./seed");
-const data = require("../data/test-data/users");
+const data = require("../data/dev-data/users");
 
 const runSeed = async () => {
   try {

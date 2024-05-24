@@ -10,6 +10,7 @@ exports.getExercises = async (req, res) => {
     if (data.length === 0) {
       return res.status(404).json({ message: "User not found" });
     }
+
     const exercises = data[0].exercises;
     if (exercises.length === 0) {
       return res.status(404).json({ message: "No exercises found" });

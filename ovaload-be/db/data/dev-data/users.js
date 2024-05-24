@@ -20,7 +20,25 @@ const users = [
           { weightKg: 110, sets: 4, reps: 8 },
         ],
       },
+      {
+        exerciseName: "spin-bike",
+        exerciseType: "cardio",
+        exerciseStats: [
+          { distanceKm: 20, timeMin: 40, reps: 12 },
+          { weightKg: 45, sets: 3, reps: 10 },
+        ],
+      },
+      {
+        exerciseName: "military-press",
+        exerciseType: "resistance",
+        exerciseStats: [
+          { weightKg: 50, sets: 4, reps: 12 },
+          { weightKg: 55, sets: 4, reps: 10 },
+        ],
+      },
     ],
+    friends:["janesmith","michaelj","sarahw"],
+    score:20
   },
   {
     name: "Jane Smith",
@@ -46,6 +64,7 @@ const users = [
         ],
       },
     ],
+    score:19
   },
   {
     name: "Michael Johnson",
@@ -69,6 +88,7 @@ const users = [
         ],
       },
     ],
+    score:5
   },
   {
     name: "Emily Clark",
@@ -92,6 +112,7 @@ const users = [
         ],
       },
     ],
+    score:30
   },
   {
     name: "Chris Evans",

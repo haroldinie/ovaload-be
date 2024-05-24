@@ -14,10 +14,10 @@ const seedDatabase = async () => {
   } catch (error) {
     console.error("Error seeding database:", error);
   } 
-  // finally {
-  //   console.log("Closing database connection");
-  //   await mongoose.connection.close();
-  // }
+  finally {
+    console.log("Closing database connection");
+    await mongoose.connection.close();
+  }
 };
 
 module.exports = seedDatabase;
