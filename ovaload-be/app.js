@@ -13,10 +13,11 @@ const {
   patchLeaderboardScore,
 } = require("./controllers/patchLeaderboardScore");
 const { getAllScores } = require("./controllers/getLeaderboardScore");
-const {patchNewFriendByUsername} = require("./controllers/patchNewFriendByUsername");  
+const {
+  patchNewFriendByUsername,
+} = require("./controllers/patchNewFriendByUsername");
 const { getFriendsScores } = require("./controllers/getFriendsScores");
-const { patchNewFriendByUsername } = require("./controllers/patchNewFriendByUsername")
-const cors = require('cors');
+const cors = require("cors");
 
 require("dotenv").config();
 const app = express();
