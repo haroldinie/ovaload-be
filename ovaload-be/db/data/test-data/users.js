@@ -21,6 +21,8 @@ const users = [
         ],
       },
     ],
+    friends: ["emilynorth", "michaelj", "sarahw"],
+    score: 20,
   },
   {
     name: "Emily North",
@@ -36,9 +38,7 @@ const users = [
       {
         exerciseName: "deadlift",
         exerciseType: "resistance",
-        exerciseStats: [
-          { weightKg: 120, sets: 3, reps: 14 }
-        ],
+        exerciseStats: [{ weightKg: 120, sets: 3, reps: 14 }],
       },
       {
         exerciseName: "overhead-press",
@@ -49,6 +49,7 @@ const users = [
         ],
       },
     ],
+    score: 0,
   },
   {
     name: "Michael Johnson",
@@ -72,6 +73,7 @@ const users = [
         ],
       },
     ],
+    score: 10,
   },
   {
     name: "Emily Clark",
@@ -157,6 +159,7 @@ const users = [
         completed: false,
       },
     ],
+    score: 5,
   },
   {
     name: "Maisy Jones",
@@ -166,9 +169,7 @@ const users = [
       {
         exerciseName: "spin-bike",
         exerciseType: "cardio",
-        exerciseStats: [
-          { distanceKm: 20, timeMin: 40}
-        ],
+        exerciseStats: [{ distanceKm: 20, timeMin: 40 }],
       },
       {
         exerciseName: "eliptical",
