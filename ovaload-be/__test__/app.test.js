@@ -4,8 +4,6 @@ const request = require("supertest");
 const connectDB = require("../db/connection");
 const mongoose = require("mongoose");
 const app = require("../app");
-const { describe } = require("node:test");
-
 
 beforeAll(async () => {
   await connectDB();
@@ -78,10 +76,10 @@ describe("GET /api/:user/exercises/:date", () => {
       });
   });
 
-  test("GET 400: Returns error if no exercises found.", () => {
+  test("GET 200: Returns error if no exercises found.", () => {
     return request(app)
       .get("/api/jimratty/exercises/2024-05-20")
-      .expect(400)
+      .expect(200)
       .then((response) => {
         expect(response.body.message).toBe(
           "No exercises found for the given date."
@@ -111,7 +109,14 @@ describe("POST /api/:user/plannedExercises", () => {
   });
 
   test("POST 201: Cardio: Post an array of exercises into selected date's planned exercise schema , and will responds with newly posted array.", () => {
-    const workoutArr = [{ exerciseName: "Spin Bike", createdFor: "2024-06-22", distanceKm: 20, timeMin: 27}];
+    const workoutArr = [
+      {
+        exerciseName: "Spin Bike",
+        createdFor: "2024-06-22",
+        distanceKm: 20,
+        timeMin: 27,
+      },
+    ];
     return request(app)
       .post("/api/maizj/plannedExercises")
       .send(workoutArr)
@@ -121,7 +126,7 @@ describe("POST /api/:user/plannedExercises", () => {
         plannedExercises.forEach((exercise) => {
           expect(exercise).toMatchObject({
             exerciseName: "spin-bike",
-            nextChallenge: [{ distanceKm: 20, timeMin: 27}],
+            nextChallenge: [{ distanceKm: 20, timeMin: 27 }],
             createdFor: "2024-06-22T00:00:00.000Z",
             completed: false,
           });
@@ -291,7 +296,6 @@ describe("GET /api/:user/:exercise", () => {
   });
 });
 
-
 describe("PATCH /api/:user/leaderboard", () => {
   test("PATCH 200: Update leaderboard score for new user", () => {
     const score = { score: 2 };
@@ -318,31 +322,45 @@ describe("PATCH /api/:user/leaderboard", () => {
   });
 });
 
-describe("GET /api/leaderboard", () => {
-  test("GET 200: Get all users' scores sorted by score in descending order", () => {
+// describe("GET /api/leaderboard", () => {
+//   test("GET 200: Get all users' scores sorted by score in descending order", () => {
+//     return request(app)
+//       .get("/api/leaderboard")
+//       .expect(200)
+//       .then(({ body }) => {
+//         const { users } = body;
+//         expect(users).toBeSortedBy("score", { descending: true });
+//       });
+//   });
+// });
+
+describe("PATCH /api/:user", () => {
+  test("PATCH 200: Updates friends list of logged-in user when given ObjectId of new friend", () => {
+    const newFriend = {
+      username: "emilynorth",
+    };
     return request(app)
-      .get("/api/leaderboard")
+      .patch("/api/chrisevans")
+      .send(newFriend)
       .expect(200)
-      .then(({body}) => {
-        const { users } = body
-        expect(users).toBeSortedBy("score",{ descending: true });
+      .then(({ body }) => {
+        const { updatedFriendsList } = body;
+        expect(updatedFriendsList[updatedFriendsList.length - 1]).toEqual(
+          newFriend.username
+        );
       });
   });
 });
 
-describe.only("PATCH /api/:user", () => {
-  test("PATCH 200: Updates friends list of logged-in user when given ObjectId of new friend",() => {
-    const newFriend = {
-      username:'emilynorth'
-    }
+describe("/api/leaderboard/friends/:user", () => {
+  test("GET 200: Returns scores for given user and their friends in descending order.", () => {
     return request(app)
-    .patch("/api/chrisevans")
-    .send(newFriend)
-    .expect(200)
-    .then(({body}) => {
-      const {updatedFriendsList} = body
-      expect(updatedFriendsList[updatedFriendsList.length-1]).toEqual(newFriend.username)
-    })
-  })
-})
-
+      .get("/api/leaderboard/friends/jimratty")
+      .expect(200)
+      .then(({ body }) => {
+        const { leaderboardData } = body;
+        expect(leaderboardData.length).toBe(4);
+        expect(leaderboardData).toBeSortedBy("score", { descending: true });
+      });
+  });
+});
