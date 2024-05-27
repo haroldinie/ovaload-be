@@ -38,7 +38,12 @@ const users = [
       },
     ],
     friends:["janesmith","michaelj","sarahw"],
-    score:20
+    score:20,
+    plannedExercise: [ 
+    { exerciseName: "Bench Press", createdFor: "2024-05-23",completed: true },
+    { exerciseName: "squat", createdFor: "2024-05-23",completed: true },
+    { exerciseName: "Spin Bike", createdFor: "2024-05-23" , distanceKm: 20, timeMin: 27,completed: true}
+   ]
   },
   {
     name: "Jane Smith",
