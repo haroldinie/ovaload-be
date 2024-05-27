@@ -18,6 +18,7 @@ const {
 } = require("./controllers/patchNewFriendByUsername");
 const { getFriendsScores } = require("./controllers/getFriendsScores");
 const cors = require("cors");
+const { getChatbotMessage } = require("./controllers/getChatbotMessage");
 
 require("dotenv").config();
 const app = express();
