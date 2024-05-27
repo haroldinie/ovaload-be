@@ -1,4 +1,4 @@
-const ChatbotMessage = require("../../models/chatbotMessage");
+const ChatbotMessage = require("../models/chatbotMessage");
 const User = require("../models/user");
 
 exports.getChatbotMessage = async (req, res) => {
@@ -6,7 +6,6 @@ exports.getChatbotMessage = async (req, res) => {
 
   try {
     const user = await User.findOne({ username: username });
-
     if (!user) return res.status(404).send("User not found");
 
     const today = new Date();
@@ -17,7 +16,7 @@ exports.getChatbotMessage = async (req, res) => {
       exerciseDate.setHours(0, 0, 0, 0);
       return exerciseDate.getTime() === today.getTime();
     });
-
+    
     if (!plannedExerciseToday) {
       const message = await ChatbotMessage.findOne({
         type: "noPlan",

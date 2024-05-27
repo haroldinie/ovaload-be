@@ -2,10 +2,8 @@ const mongoose = require("mongoose");
 const connectDB = require("../connection");
 const User = require("../../models/user");
 const ChatbotMessage = require("../../models/chatbotMessage");
-const users = require("../data/dev-data/users");
-const chatbotMessages = require("../data/dev-data/chatbotMessages");
 
-const seedDatabase = async (data) => {
+const seedDatabase = async (users, chatbotMessages) => {
   try {
     await connectDB();
     // Clear existing data
