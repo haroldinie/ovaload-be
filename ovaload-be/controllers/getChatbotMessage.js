@@ -16,13 +16,13 @@ exports.getChatbotMessage = async (req, res) => {
       exerciseDate.setHours(0, 0, 0, 0);
       return exerciseDate.getTime() === today.getTime();
     });
-    
+
     if (!plannedExerciseToday) {
       const message = await ChatbotMessage.findOne({
         type: "noPlan",
         timeOfDay: "any",
       });
-      return res.json({ message: message.message });
+      return res.status(200).json({ message: message.message });
     }
 
     if (plannedExerciseToday.completed) {
@@ -30,7 +30,7 @@ exports.getChatbotMessage = async (req, res) => {
         type: "completed",
         timeOfDay: "any",
       });
-      return res.json({ message: message.message });
+      return res.status(200).json({ message: message.message });
     }
 
     const timeOfDay = getTimeOfDay();
@@ -39,7 +39,7 @@ exports.getChatbotMessage = async (req, res) => {
       timeOfDay,
     });
 
-    res.json({
+    res.status(200).json({
       message: message.message,
       responses: message.responses,
     });
