@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const env = process.env.NODE_ENV || "development";
+const env = process.env.NODE_ENV || "development" || "production"
 const envFile =
   env === "test"
     ? ".env.test"

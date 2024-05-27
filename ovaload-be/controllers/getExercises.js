@@ -8,7 +8,7 @@ exports.getExercises = async (req, res) => {
   try {
     const data = await User.find({ username: username }, "exercises");
     if (data.length === 0) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "No exercises found" });
     }
 
     const exercises = data[0].exercises;
