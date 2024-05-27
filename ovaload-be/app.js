@@ -26,12 +26,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/api/chatbot/:user", getChatbotMessage);
 app.get("/api/:user/exercises", getExercises);
 app.get("/api/:user/:exercise", getExerciseById);
 app.get("/api/:user/exercises/:date", getExercisesByDate);
 app.get("/api/:user/plannedExercises/:date", getPlannedExercisesByDate);
 app.get("/api/leaderboard/friends/:user", getFriendsScores);
-app.get("api/chatbot/:user", getChatbotMessage)
 app.post("/api/:user/exercises", postExercise);
 app.post("/api/:user/plannedExercises", postPlannedExercise);
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);

@@ -1,4 +1,5 @@
-const data = require("../db/data/test-data/users");
+const users = require("../db/data/test-data/users");
+const chatbotMessages = require("../db/data/test-data/chatbotMessage");
 const seed = require("../db/seeds/seed");
 const request = require("supertest");
 const connectDB = require("../db/connection");
@@ -7,7 +8,7 @@ const app = require("../app");
 
 beforeAll(async () => {
   await connectDB();
-  await seed(data);
+  await seed(users, chatbotMessages);
 });
 
 // beforeEach(async () => {
@@ -62,7 +63,7 @@ describe("GET /api/:user/exercises", () => {
 describe("GET /api/:user/exercises/:date", () => {
   test("GET 200: Returns all exercises for user by selected date.", () => {
     return request(app)
-      .get("/api/jimratty/exercises/2024-05-24")
+      .get("/api/jimratty/exercises/2024-05-27")
       .expect(200)
       .then(({ body }) => {
         const { exercisesByDate } = body;
@@ -361,6 +362,20 @@ describe("/api/leaderboard/friends/:user", () => {
         const { leaderboardData } = body;
         expect(leaderboardData.length).toBe(4);
         expect(leaderboardData).toBeSortedBy("score", { descending: true });
+      });
+  });
+});
+
+describe("/api/chatbot/:user", () => {
+  test("GET 200: Returns chatbot message ", () => {
+    return request(app)
+      .get("/api/chatbot/jimratty")
+      .expect(200)
+      .then(({ body }) => {
+        const { message } = body;
+        expect(message).toBe(
+          "It looks like you have no exercises planned for today. Why not add some to your calendar?"
+        );
       });
   });
 });
