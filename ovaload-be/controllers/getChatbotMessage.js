@@ -1,4 +1,5 @@
 const ChatbotMessage = require("../../models/chatbotMessage");
+const User = require("../models/user");
 
 exports.getChatbotMessage = async (req, res) => {
   const username = req.params.user;
