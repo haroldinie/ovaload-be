@@ -378,4 +378,20 @@ describe("/api/chatbot/:user", () => {
         );
       });
   });
+
+  //uses users from dev-data
+  test.skip("GET 200: Returns chatbot message", () => {
+    const responsesArr = { user: expect.any(String), bot: expect.any(String) };
+    return request(app)
+      .get("/api/chatbot/sarahw")
+      .expect(200)
+      .then(({ body }) => {
+        const { message } = body;
+        const { responses } = body;
+        responses.map((item) => {
+          expect(item).toMatchObject(responsesArr);
+        });
+        expect(message).toBe("Good morning! How are you feeling today?");
+      });
+  });
 });
