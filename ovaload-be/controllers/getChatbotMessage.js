@@ -39,8 +39,7 @@ exports.getChatbotMessage = async (req, res) => {
       type: "incomplete",
       timeOfDay,
     });
-    console.log("hihi", timeOfDay, message);
-
+    
     res.status(200).json({
       message: message.message,
       responses: message.responses,
