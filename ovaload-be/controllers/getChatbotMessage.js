@@ -1,5 +1,6 @@
 const ChatbotMessage = require("../models/chatbotMessage");
 const User = require("../models/user");
+const { getTimeOfDay } = require("../utils/utils");
 
 exports.getChatbotMessage = async (req, res) => {
   const username = req.params.user;
@@ -38,6 +39,7 @@ exports.getChatbotMessage = async (req, res) => {
       type: "incomplete",
       timeOfDay,
     });
+    console.log("hihi", timeOfDay, message);
 
     res.status(200).json({
       message: message.message,

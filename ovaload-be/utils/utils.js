@@ -29,4 +29,17 @@ function formatDate(date) {
   return formattedDate;
 }
 
-module.exports = formatDate
+function getTimeOfDay() {
+  const now = new Date();
+  const hours = now.getHours();
+
+  if (hours < 12) {
+    return "morning";
+  } else if (hours < 18) {
+    return "afternoon";
+  } else {
+    return "evening";
+  }
+}
+
+module.exports = {formatDate, getTimeOfDay}

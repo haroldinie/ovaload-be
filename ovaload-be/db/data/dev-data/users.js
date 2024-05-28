@@ -37,13 +37,23 @@ const users = [
         ],
       },
     ],
-    friends:["janesmith","michaelj","sarahw"],
-    score:20,
-    plannedExercise: [ 
-    { exerciseName: "Bench Press", createdFor: "2024-05-23",completed: true },
-    { exerciseName: "squat", createdFor: "2024-05-23",completed: true },
-    { exerciseName: "Spin Bike", createdFor: "2024-05-23" , distanceKm: 20, timeMin: 27,completed: true}
-   ]
+    friends: ["janesmith", "michaelj", "sarahw"],
+    score: 20,
+    plannedExercise: [
+      {
+        exerciseName: "Bench Press",
+        createdFor: "2024-05-23",
+        completed: true,
+      },
+      { exerciseName: "squat", createdFor: "2024-05-23", completed: true },
+      {
+        exerciseName: "Spin Bike",
+        createdFor: "2024-05-23",
+        distanceKm: 20,
+        timeMin: 27,
+        completed: true,
+      },
+    ],
   },
   {
     name: "Jane Smith",
@@ -69,7 +79,7 @@ const users = [
         ],
       },
     ],
-    score:19
+    score: 19,
   },
   {
     name: "Michael Johnson",
@@ -93,7 +103,7 @@ const users = [
         ],
       },
     ],
-    score:5
+    score: 5,
   },
   {
     name: "Emily Clark",
@@ -117,7 +127,7 @@ const users = [
         ],
       },
     ],
-    score:30
+    score: 30,
   },
   {
     name: "Chris Evans",
@@ -146,24 +156,139 @@ const users = [
     name: "Sarah Williams",
     username: "sarahw",
     password: "password222",
+    friends: ["janesmith", "michaelj", "maizj"],
     exercises: [
       {
         exerciseName: "leg-curl",
         exerciseType: "resistance",
         exerciseStats: [
-          { weightKg: 40, sets: 3, reps: 12 },
-          { weightKg: 45, sets: 3, reps: 10 },
+          {
+            weightKg: 40,
+            sets: 3,
+            reps: 12,
+            createdAt: new Date("2024-05-01"),
+          },
+          {
+            weightKg: 45,
+            sets: 3,
+            reps: 10,
+            createdAt: new Date("2024-05-05"),
+          },
         ],
       },
       {
         exerciseName: "leg-extension",
         exerciseType: "resistance",
         exerciseStats: [
-          { weightKg: 50, sets: 4, reps: 12 },
-          { weightKg: 55, sets: 4, reps: 10 },
+          {
+            weightKg: 50,
+            sets: 4,
+            reps: 12,
+            createdAt: new Date("2024-05-07"),
+          },
+          {
+            weightKg: 55,
+            sets: 4,
+            reps: 10,
+            createdAt: new Date("2024-05-10"),
+          },
+        ],
+      },
+      {
+        exerciseName: "bench-press",
+        exerciseType: "resistance",
+        exerciseStats: [
+          {
+            weightKg: 60,
+            sets: 3,
+            reps: 10,
+            createdAt: new Date("2024-05-12"),
+          },
+          { weightKg: 65, sets: 3, reps: 8, createdAt: new Date("2024-05-15") },
+        ],
+      },
+      {
+        exerciseName: "deadlift",
+        exerciseType: "resistance",
+        exerciseStats: [
+          { weightKg: 80, sets: 4, reps: 8, createdAt: new Date("2024-05-18") },
+          { weightKg: 85, sets: 4, reps: 6, createdAt: new Date("2024-05-20") },
+        ],
+      },
+      {
+        exerciseName: "running",
+        exerciseType: "cardio",
+        exerciseStats: [
+          { distanceKm: 5, timeMin: 30, createdAt: new Date("2024-05-22") },
+          { distanceKm: 7, timeMin: 45, createdAt: new Date("2024-05-24") },
+        ],
+      },
+      {
+        exerciseName: "cycling",
+        exerciseType: "cardio",
+        exerciseStats: [
+          { distanceKm: 10, timeMin: 60, createdAt: new Date("2024-05-25") },
+          { distanceKm: 15, timeMin: 90, createdAt: new Date("2024-05-26") },
         ],
       },
     ],
+    plannedExercise: [
+      {
+        exerciseName: "leg-curl",
+        nextChallenge: [
+          { weightKg: 50, sets: 4, reps: 12 },
+          { weightKg: 55, sets: 4, reps: 10 },
+        ],
+        createdFor: new Date("2024-05-27"),
+        completed: false,
+      },
+      {
+        exerciseName: "leg-extension",
+        nextChallenge: [
+          { weightKg: 60, sets: 4, reps: 12 },
+          { weightKg: 65, sets: 4, reps: 10 },
+        ],
+        createdFor: new Date("2024-05-28"),
+        completed: false,
+      },
+      {
+        exerciseName: "bench-press",
+        nextChallenge: [
+          { weightKg: 70, sets: 4, reps: 10 },
+          { weightKg: 75, sets: 4, reps: 8 },
+        ],
+        createdFor: new Date("2024-05-29"),
+        completed: false,
+      },
+      {
+        exerciseName: "deadlift",
+        nextChallenge: [
+          { weightKg: 90, sets: 4, reps: 8 },
+          { weightKg: 95, sets: 4, reps: 6 },
+        ],
+        createdFor: new Date("2024-05-30"),
+        completed: false,
+      },
+      {
+        exerciseName: "running",
+        nextChallenge: [
+          { distanceKm: 6, timeMin: 35 },
+          { distanceKm: 8, timeMin: 50 },
+        ],
+        createdFor: new Date("2024-05-31"),
+        completed: false,
+      },
+      {
+        exerciseName: "cycling",
+        nextChallenge: [
+          { distanceKm: 12, timeMin: 70 },
+          { distanceKm: 17, timeMin: 95 },
+        ],
+        createdFor: new Date("2024-06-01"),
+        completed: false,
+      },
+    ],
+    score: 25,
   },
   {
     name: "Maisy Jones",
