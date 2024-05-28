@@ -41,13 +41,13 @@ const users = [
     score: 20,
     plannedExercise: [
       {
-        exerciseName: "Bench Press",
+        exerciseName: "bench-press",
         createdFor: "2024-05-23",
         completed: true,
       },
       { exerciseName: "squat", createdFor: "2024-05-23", completed: true },
       {
-        exerciseName: "Spin Bike",
+        exerciseName: "spin-bike",
         createdFor: "2024-05-23",
         distanceKm: 20,
         timeMin: 27,

@@ -1,9 +1,10 @@
 const User = require("../models/user");
-const formatDate = require("../utils/utils");
+const { formatDate } = require("../utils/utils");
 
 exports.deletePlannedExercise = async (req, res) => {
   const username = req.params.user;
   const date = formatDate(req.params.date);
+  const exerciseName = req.params.exerciseName;
 
   try {
     const user = await User.findOne({ username: username });
@@ -13,7 +14,7 @@ exports.deletePlannedExercise = async (req, res) => {
 
     user.plannedExercise = user.plannedExercise.filter((exercise) => {
       const createdForStr = exercise.createdFor.toString();
-      return !createdForStr.startsWith(date);
+      return !createdForStr.startsWith(date) || exercise.exerciseName !== exerciseName
     });
 
     await user.save();
