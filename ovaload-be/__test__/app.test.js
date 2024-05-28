@@ -1,4 +1,4 @@
-const users = require("../db/data/test-data/users");
+const users = require("../db/data/dev-data/users");
 const chatbotMessages = require("../db/data/test-data/chatbotMessage");
 const seed = require("../db/seeds/seed");
 const request = require("supertest");
