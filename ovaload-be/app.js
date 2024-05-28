@@ -19,6 +19,9 @@ const {
 const { getFriendsScores } = require("./controllers/getFriendsScores");
 const cors = require("cors");
 const { getChatbotMessage } = require("./controllers/getChatbotMessage");
+const {
+  deletePlannedExercise,
+} = require("./controllers/deletePlannedExercise");
 
 require("dotenv").config();
 const app = express();
@@ -41,6 +44,7 @@ app.patch(
   "/api/:user/plannedExercises/:date/:exerciseName",
   patchPlannedExercise
 );
+app.delete("/api/:user/plannedExercises/:date/:exerciseName", deletePlannedExercise);
 // app.get("/api/leaderboard", getAllScores);
 
 app.all("*", (req, res) => {
