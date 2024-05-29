@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 exports.patchNewFriendByUsername = async (req, res) => {
-  const friend = req.body.friend;
+  const friend = req.body.username;
   const loggedInUser = req.params.user;
 
   try {

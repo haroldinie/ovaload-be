@@ -38,7 +38,7 @@ app.get("/api/leaderboard/friends/:user", getFriendsScores);
 app.post("/api/:user/exercises", postExercise);
 app.post("/api/:user/plannedExercises", postPlannedExercise);
 app.post("/api/:user/exercises/:exerciseName", postExerciseStats);
-app.patch("/api/friends/:user/:friend", patchNewFriendByUsername);
+app.patch("/api/friends/:user", patchNewFriendByUsername);
 app.patch("/api/:user/leaderboard", patchLeaderboardScore);
 app.patch(
   "/api/:user/plannedExercises/:date/:exerciseName",
