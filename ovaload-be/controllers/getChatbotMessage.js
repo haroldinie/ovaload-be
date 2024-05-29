@@ -12,7 +12,7 @@ exports.getChatbotMessage = async (req, res) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const plannedExerciseToday = user.plannedExercise.find((exercise) => {
+    const plannedExerciseToday = user.plannedExercise.filter((exercise) => {
       const exerciseDate = new Date(exercise.createdFor);
       exerciseDate.setHours(0, 0, 0, 0);
       return exerciseDate.getTime() === today.getTime();
@@ -26,7 +26,11 @@ exports.getChatbotMessage = async (req, res) => {
       return res.status(200).json({ message: message.message });
     }
 
-    if (plannedExerciseToday.completed) {
+    const areAllCompleted = plannedExerciseToday.every((exercise) => {
+      return exercise.completed;
+    });
+
+    if (areAllCompleted) {
       const message = await ChatbotMessage.findOne({
         type: "completed",
         timeOfDay: "any",
@@ -39,7 +43,7 @@ exports.getChatbotMessage = async (req, res) => {
       type: "incomplete",
       timeOfDay,
     });
-    
+
     res.status(200).json({
       message: message.message,
       responses: message.responses,
