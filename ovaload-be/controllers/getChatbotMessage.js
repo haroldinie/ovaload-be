@@ -18,7 +18,7 @@ exports.getChatbotMessage = async (req, res) => {
       return exerciseDate.getTime() === today.getTime();
     });
 
-    if (!plannedExerciseToday) {
+    if (plannedExerciseToday.length === 0) {
       const message = await ChatbotMessage.findOne({
         type: "noPlan",
         timeOfDay: "any",
