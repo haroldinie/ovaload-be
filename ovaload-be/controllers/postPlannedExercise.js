@@ -88,7 +88,7 @@ exports.postPlannedExercise = async (req, res) => {
 
         return {
           exerciseName: exercise.exerciseName,
-          exerciseType: exercise.exerciseType,
+          exerciseType: "resistance",
           nextChallenge: [
             {
               weightKg: nextWeightKg,
@@ -103,7 +103,7 @@ exports.postPlannedExercise = async (req, res) => {
         // Process cardio exercises (user will input their own targets for cardio exercises)
         return {
           exerciseName: exercise.exerciseName,
-          exerciseType: exercise.exerciseType,
+          exerciseType: "cardio",
           nextChallenge: [
             {
               distanceKm: exercise.distanceKm,
