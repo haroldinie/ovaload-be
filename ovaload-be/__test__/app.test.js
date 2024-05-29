@@ -1,4 +1,4 @@
-const users = require("../db/data/test-data/users");
+const users = require("../db/data/dev-data/users");
 const chatbotMessages = require("../db/data/test-data/chatbotMessage");
 const seed = require("../db/seeds/seed");
 const request = require("supertest");
@@ -396,12 +396,11 @@ describe("/api/chatbot/:user", () => {
   });
 });
 
-
 //uses users from dev-data
-describe.skip("/api/:user/plannedExercises/:date/:exerciseName", () => {
+describe.only("/api/:user/plannedExercises/:date/:exerciseName", () => {
   test("DELETE: Deletes plannedExercises by name and date", () => {
     return request(app)
-      .delete("/api/jimratty/plannedExercises/2024-05-23/bench-press")
+      .delete("/api/sarahw/plannedExercises/2024-05-30/deadlift")
       .expect(204)
       .then(({ body }) => {
         expect(body).toEqual({});
