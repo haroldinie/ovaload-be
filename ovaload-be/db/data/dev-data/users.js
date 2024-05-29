@@ -323,6 +323,7 @@ const users = [
     plannedExercise: [
       {
         exerciseName: "leg-curl",
+        exerciseType: "resistance",
         nextChallenge: [
           { weightKg: 50, sets: 4, reps: 12 },
           { weightKg: 55, sets: 4, reps: 10 },
@@ -332,6 +333,7 @@ const users = [
       },
       {
         exerciseName: "leg-extension",
+        exerciseType: "resistance",
         nextChallenge: [
           { weightKg: 60, sets: 4, reps: 12 },
           { weightKg: 65, sets: 4, reps: 10 },
@@ -341,6 +343,7 @@ const users = [
       },
       {
         exerciseName: "bench-press",
+        exerciseType: "resistance",
         nextChallenge: [
           { weightKg: 70, sets: 4, reps: 10 },
           { weightKg: 75, sets: 4, reps: 8 },
@@ -350,6 +353,7 @@ const users = [
       },
       {
         exerciseName: "deadlift",
+        exerciseType: "resistance",
         nextChallenge: [
           { weightKg: 90, sets: 4, reps: 8 },
           { weightKg: 95, sets: 4, reps: 6 },
@@ -359,6 +363,7 @@ const users = [
       },
       {
         exerciseName: "running",
+        exerciseType: "cardio",
         nextChallenge: [
           { distanceKm: 6, timeMin: 35 },
           { distanceKm: 8, timeMin: 50 },
@@ -368,6 +373,7 @@ const users = [
       },
       {
         exerciseName: "cycling",
+        exerciseType: "cardio",
         nextChallenge: [
           { distanceKm: 12, timeMin: 70 },
           { distanceKm: 17, timeMin: 95 },

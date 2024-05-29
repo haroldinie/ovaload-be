@@ -39,6 +39,7 @@ const exerciseSchema = new mongoose.Schema({
 
 const plannedExerciseSchema = new mongoose.Schema({
   exerciseName: { type: String, lowercase: true },
+  exerciseType: { type: String, lowercase: true },
   nextChallenge: [
     {
       weightKg: {
