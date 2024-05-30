@@ -18,8 +18,9 @@ exports.postExercise = async (req, res) => {
     }
 
     user.exercises.push(newExercise);
-    const addedExercise = user.exercises[user.exercises.length - 1];
     await user.save();
+    
+    const addedExercise = user.exercises[user.exercises.length - 1];
 
     res.status(201).json({ exercise: addedExercise });
   } catch (err) {
