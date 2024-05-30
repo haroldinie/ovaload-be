@@ -12,7 +12,7 @@ You can access the deployed app [here](https://ovaload-be.onrender.com/api/sarah
 
 ## Features
 
-- **User Management**: CRUD operations for managing user accounts.
+- **User Management**: CRUD operations for managing user data.
 - **Exercise Management**: Store and retrieve user-created exercises.
 - **Workout Management**: CRUD operations for creating, updating, and deleting workout routines.
 - **Progress Tracking**: Store and retrieve workout logs for progress tracking.
